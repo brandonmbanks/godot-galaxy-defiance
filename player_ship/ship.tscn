@@ -1,10 +1,13 @@
-[gd_scene load_steps=10 format=3 uid="uid://u47i3d01fsnq"]
+[gd_scene load_steps=13 format=3 uid="uid://u47i3d01fsnq"]
 
+[ext_resource type="Script" path="res://player_ship/ship.gd" id="1_1w0at"]
 [ext_resource type="Texture2D" uid="uid://csv6axkat2gqy" path="res://assets/ship.png" id="1_o66c7"]
 [ext_resource type="Script" path="res://components/move_component.gd" id="2_byi4f"]
 [ext_resource type="Script" path="res://components/move_input_component.gd" id="3_n4ya8"]
 [ext_resource type="Resource" uid="uid://dgxg6x3ugs2at" path="res://player_ship/ship_move_stats.tres" id="4_ohusl"]
 [ext_resource type="Script" path="res://components/position_clamp_component.gd" id="5_81xdv"]
+[ext_resource type="Script" path="res://components/spawner_component.gd" id="6_l7j8v"]
+[ext_resource type="PackedScene" uid="uid://dwmjthfb17u61" path="res://projectiles/laser.tscn" id="7_yv8ve"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_t1yni"]
 atlas = ExtResource("1_o66c7")
@@ -46,6 +49,7 @@ animations = [{
 }]
 
 [node name="Ship" type="Node2D"]
+script = ExtResource("1_1w0at")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_o30pe")
@@ -64,3 +68,17 @@ move_stats = ExtResource("4_ohusl")
 [node name="PositionClampComponent" type="Node2D" parent="." node_paths=PackedStringArray("actor")]
 script = ExtResource("5_81xdv")
 actor = NodePath("..")
+
+[node name="LeftCannon" type="Marker2D" parent="."]
+position = Vector2(-5, -4)
+
+[node name="RightCannon" type="Marker2D" parent="."]
+position = Vector2(5, -4)
+
+[node name="SpawnerComponent" type="Node2D" parent="."]
+script = ExtResource("6_l7j8v")
+scene = ExtResource("7_yv8ve")
+
+[node name="FireRateTimer" type="Timer" parent="."]
+wait_time = 0.4
+autostart = true

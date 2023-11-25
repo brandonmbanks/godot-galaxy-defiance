@@ -24,7 +24,6 @@ scale = Vector2(0.2, 0.4)
 [node name="ScaleComponent" type="Node" parent="." node_paths=PackedStringArray("sprite")]
 script = ExtResource("4_ykg4m")
 sprite = NodePath("../Sprite2D")
-scale_amount = Vector2(2, 2)
 scale_duration = 1.0
 
 [node name="FlashComponent" type="Node" parent="." node_paths=PackedStringArray("sprite")]

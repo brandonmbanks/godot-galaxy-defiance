@@ -1,0 +1,54 @@
+[gd_scene load_steps=9 format=3 uid="uid://qq78pto1jiok"]
+
+[ext_resource type="Texture2D" uid="uid://b2dw05cpwbnvt" path="res://assets/space.png" id="1_01sbh"]
+[ext_resource type="Script" path="res://space_background.gd" id="1_1xv6w"]
+[ext_resource type="Texture2D" uid="uid://bgbmts7byhm1y" path="res://assets/far_stars.png" id="2_r3w13"]
+[ext_resource type="Script" path="res://components/move_stats.gd" id="3_8qkit"]
+[ext_resource type="Texture2D" uid="uid://cko25i13l0mqy" path="res://assets/close_stars.png" id="3_xlann"]
+[ext_resource type="Script" path="res://components/move_component.gd" id="5_qwh22"]
+[ext_resource type="Script" path="res://components/move_input_component.gd" id="6_7xh1r"]
+
+[sub_resource type="Resource" id="Resource_s3dlp"]
+script = ExtResource("3_8qkit")
+speed = 100
+
+[node name="SpaceBackground" type="ParallaxBackground"]
+script = ExtResource("1_1xv6w")
+
+[node name="SpaceLayer" type="ParallaxLayer" parent="."]
+motion_mirroring = Vector2(160, 240)
+
+[node name="TextureRect" type="TextureRect" parent="SpaceLayer"]
+offset_right = 160.0
+offset_bottom = 240.0
+texture = ExtResource("1_01sbh")
+stretch_mode = 1
+
+[node name="DistantStarsLayer" type="ParallaxLayer" parent="."]
+motion_mirroring = Vector2(160, 240)
+
+[node name="TextureRect" type="TextureRect" parent="DistantStarsLayer"]
+offset_right = 160.0
+offset_bottom = 240.0
+texture = ExtResource("2_r3w13")
+stretch_mode = 1
+
+[node name="StarsLayer" type="ParallaxLayer" parent="."]
+motion_mirroring = Vector2(160, 240)
+
+[node name="TextureRect" type="TextureRect" parent="StarsLayer"]
+offset_right = 160.0
+offset_bottom = 241.0
+texture = ExtResource("3_xlann")
+stretch_mode = 1
+
+[node name="EmptySprite2D" type="Sprite2D" parent="."]
+
+[node name="MoveComponent" type="Node" parent="." node_paths=PackedStringArray("actor")]
+script = ExtResource("5_qwh22")
+actor = NodePath("../EmptySprite2D")
+
+[node name="MoveInputComponent" type="Node" parent="." node_paths=PackedStringArray("move_component")]
+script = ExtResource("6_7xh1r")
+move_component = NodePath("../MoveComponent")
+move_stats = SubResource("Resource_s3dlp")
